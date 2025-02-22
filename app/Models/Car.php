@@ -20,4 +20,9 @@ class Car extends Model
     {
         return $this->hasMany(Service::class);
     }
+
+    public function latestService()
+    {
+        return $this->hasOne(Service::class, 'car_id')->orderBy('log_number', 'desc');
+    }
 }

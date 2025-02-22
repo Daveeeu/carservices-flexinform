@@ -6,6 +6,8 @@ export default {
             clients: [],
             pagination: {},
             baseUrl: "/api/clients",
+            expandedClientId: null,
+            selectedClientCars: [],
         };
     },
     computed: {
@@ -41,6 +43,23 @@ export default {
                 this.pagination = response.data;
             } catch (error) {
                 console.error("Error fetching clients:", error);
+            }
+        },
+        async fetchClientCars(clientId) {
+            try {
+                const response = await axios.get(`/api/clients/${clientId}/cars`);
+                this.selectedClientCars = response.data;
+            } catch (error) {
+                console.error("Error fetching client cars:", error);
+            }
+        },
+        async toggleClientCars(clientId) {
+            if (this.expandedClientId === clientId) {
+                this.expandedClientId = null;
+                this.selectedClientCars = [];
+            } else {
+                this.expandedClientId = clientId;
+                await this.fetchClientCars(clientId);
             }
         },
     },

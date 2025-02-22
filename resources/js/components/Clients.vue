@@ -10,11 +10,53 @@
             </tr>
             </thead>
             <tbody>
-            <tr v-for="client in clients" :key="client.id">
-                <td>{{ client.id }}</td>
-                <td>{{ client.name }}</td>
-                <td>{{ client.card_number }}</td>
-            </tr>
+            <template v-for="client in clients" :key="client.id">
+                <!-- Ügyfél sora -->
+                <tr>
+                    <td>{{ client.id }}</td>
+                    <td @click="toggleClientCars(client.id)" style="cursor: pointer; color: blue;">
+                        {{ client.name }}
+                    </td>
+                    <td>{{ client.card_number }}</td>
+                </tr>
+
+
+                <!-- Autók táblázata az ügyfél sora alatt -->
+                <tr v-if="expandedClientId === client.id">
+                    <template v-if="selectedClientCars.length === 0">
+                        <td colspan="7" class="text-center">No cars available for this client.</td>
+                    </template>
+
+                    <template v-if="selectedClientCars.length !== 0">
+                        <td colspan="3">
+                            <table class="table table-sm table-bordered">
+                                <thead>
+                                <tr>
+                                    <th>Car ID</th>
+                                    <th>Type</th>
+                                    <th>Registered</th>
+                                    <th>Own Brand</th>
+                                    <th>Accidents</th>
+                                    <th>Last Event</th>
+                                    <th>Last Event Time</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr v-for="car in selectedClientCars" :key="car.id">
+                                    <td>{{ car.car_id }}</td>
+                                    <td>{{ car.type }}</td>
+                                    <td>{{ car.registered }}</td>
+                                    <td>{{ car.ownbrand ? "Yes" : "No" }}</td>
+                                    <td>{{ car.accidents }}</td>
+                                    <td>{{ car.latestService?.event || "N/A" }}</td>
+                                    <td>{{ car.latestService?.event_time || "N/A" }}</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </template>
+                </tr>
+            </template>
             </tbody>
         </table>
 
@@ -36,8 +78,7 @@
                     v-for="page in visiblePages"
                     :key="page"
                     class="page-item"
-                    :class="{ active: page === pagination.current_page }"
-                >
+                    :class="{ active: page === pagination.current_page }">
                     <button class="page-link" @click="fetchClients(`${baseUrl}?page=${page}`)">{{ page }}</button>
                 </li>
 
@@ -55,10 +96,7 @@
     </div>
 </template>
 
-<script>
-import ClientsLogic from "../clients";
-
-export default ClientsLogic;
-</script>
+<script src="../clients.js"></script>
 
 <style src="../../css/clients.css"></style>
+
