@@ -1,11 +1,22 @@
 <template>
-    <h1>Üdvözöllek a Laravel és Vue integrációban!</h1>
+    <div id="app">
+        <Clients />
+    </div>
 </template>
 
-<script setup>
-// Itt adhatsz hozzá JavaScript funkciókat, ha szükséges.
+<script>
+import Clients from './components/Clients.vue';
+
+export default {
+    name: 'App',
+    components: {
+        Clients,
+    },
+};
 </script>
 
 <style>
-/* Itt adhatsz hozzá stílusokat */
+body {
+    font-family: Arial, sans-serif;
+}
 </style>
