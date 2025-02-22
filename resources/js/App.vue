@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import Clients from './components/Clients.vue';
+import Clients from './pages/Clients.vue';
 
 export default {
     name: 'App',

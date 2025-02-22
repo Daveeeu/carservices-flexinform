@@ -1,6 +1,13 @@
 import axios from "axios";
-
+import ClientsTable from './components/ClientsTable.vue';
+import ServiceLogModal from './components/ServiceLogModal.vue';
+import Pagination from "./components/Pagination.vue";
 export default {
+    components: {
+        Pagination,
+        ClientsTable,
+        ServiceLogModal,
+    },
     data() {
         return {
             clients: [],
@@ -8,6 +15,8 @@ export default {
             baseUrl: "/api/clients",
             expandedClientId: null,
             selectedClientCars: [],
+            selectedCarServices: [],
+            isModalOpen: false,
         };
     },
     computed: {
@@ -53,6 +62,17 @@ export default {
                 console.error("Error fetching client cars:", error);
             }
         },
+        async fetchClientCarServices(carId) {
+            try {
+                let clientId = this.expandedClientId;
+                const response = await axios.get(`/api/clients/${clientId}/cars/${carId}/services`);
+                this.selectedCarServices = response.data;
+                this.isModalOpen = true;
+
+            } catch (error) {
+                console.error("Error fetching client cars:", error);
+            }
+        },
         async toggleClientCars(clientId) {
             if (this.expandedClientId === clientId) {
                 this.expandedClientId = null;
@@ -62,5 +82,8 @@ export default {
                 await this.fetchClientCars(clientId);
             }
         },
+        closeModal(){
+            this.isModalOpen = false;
+        }
     },
 };

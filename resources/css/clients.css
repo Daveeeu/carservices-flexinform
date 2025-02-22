@@ -32,3 +32,85 @@
 .selected-row {
     background-color: #f0f8ff; /* Világoskék háttérszín */
 }
+
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-dialog {
+    background-color: white;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+ .modal-backdrop {
+     position: fixed;
+     top: 0;
+     left: 0;
+     width: 100%;
+     height: 100%;
+     background-color: rgba(0, 0, 0, 0.5); /* Sötétített háttér */
+     display: flex;
+     justify-content: center;
+     align-items: center;
+     z-index: 1050;
+ }
+
+.modal-dialog {
+    background-color: #fff; /* Fehér háttér */
+    border-radius: 10px; /* Lekerekített sarkok */
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3); /* Árnyék */
+    width: 90%;
+    max-width: 600px; /* Maximális szélesség */
+}
+
+.modal-header {
+    padding: 1rem;
+    border-bottom: 1px solid #eaeaea; /* Vékony elválasztó vonal */
+}
+
+.modal-title {
+    font-size: 1.5rem; /* Nagyobb cím betűméret */
+}
+
+.btn-close {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+.modal-body {
+    padding: 1rem;
+}
+
+.modal-footer {
+    padding: 1rem;
+    border-top: 1px solid #eaeaea; /* Vékony elválasztó vonal */
+}
+
+.btn-secondary {
+    background-color: #6c757d; /* Szürke gomb */
+    color: white;
+}
+
+.btn-secondary:hover {
+    background-color: #5a6268; /* Sötétebb szürke hover állapot */
+}
