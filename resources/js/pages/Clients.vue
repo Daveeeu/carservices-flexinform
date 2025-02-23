@@ -1,6 +1,12 @@
 <template>
     <div class="container mt-5">
+        <ClientSearch
+            :isSearching="isSearching"
+            @search="handleSearch"
+            @clearSearch="clearSearch"
+        />
         <h1 class="text-center mb-4">Clients</h1>
+
         <ClientsTable
             :clients="clients"
             :expanded-client-id="expandedClientId"

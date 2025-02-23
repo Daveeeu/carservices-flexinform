@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\SearchClientRequest;
 use App\Services\ClientService;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Support\Facades\Log;
 
 class ClientController extends Controller
 {
@@ -43,5 +43,37 @@ class ClientController extends Controller
     {
         $cars = $this->clientService->getClientCars($clientId);
         return response()->json($cars);
+    }
+
+
+    /**
+     * Ügyfél keresése validációval és eredmények megjelenítésével.
+     *
+     * @param SearchClientRequest $request
+     * @return JsonResponse
+     */
+    public function searchClient(SearchClientRequest $request): JsonResponse
+    {
+        $validatedData = $request->validated();
+
+        if (empty($validatedData['name']) && empty($validatedData['card_number'])) {
+            return response()->json(['error' => 'Either name or card number must be provided.'], 422);
+        }
+
+        if (!empty($validatedData['name']) && !empty($validatedData['card_number'])) {
+            return response()->json(['error' => 'Only one field can be filled at a time.'], 422);
+        }
+
+        try {
+            $client = $this->clientService->findClient($validatedData);
+
+            if ($client === null) {
+                return response()->json(['error' => 'No client found.'], 404);
+            }
+
+            return response()->json($client);
+        } catch (\Exception $e) {
+            return response()->json(['error' => $e->getMessage()], 500);
+        }
     }
 }

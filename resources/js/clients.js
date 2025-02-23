@@ -1,12 +1,15 @@
 import axios from "axios";
 import ClientsTable from './components/ClientsTable.vue';
+import ClientSearch from './components/ClientSearch.vue';
 import ServiceLogModal from './components/ServiceLogModal.vue';
 import Pagination from "./components/Pagination.vue";
+
 export default {
     components: {
         Pagination,
         ClientsTable,
         ServiceLogModal,
+        ClientSearch
     },
     data() {
         return {
@@ -84,6 +87,6 @@ export default {
         },
         closeModal(){
             this.isModalOpen = false;
-        }
+        },
     },
 };
