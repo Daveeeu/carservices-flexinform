@@ -29,12 +29,12 @@ class ClientService
      * @param int $clientId
      * @return Collection
      */
-    public function getClientCars($clientId): Collection
+    public function getClientCars(int $clientId): Collection
     {
         return Car::where('client_id', $clientId)
-            ->with(['latestService' => function ($query) {
+            ->with(['latestService' => function ($query) use ($clientId) {
                 $query->select('car_id', 'event', 'event_time')
-                    ->orderBy('log_number', 'desc')
+                    ->where('client_id', $clientId)
                     ->limit(1);
             }])
             ->get();
