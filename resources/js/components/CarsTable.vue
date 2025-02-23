@@ -14,11 +14,8 @@
         <tbody v-if="cars.length > 0">
         <tr
             v-for="car in cars"
-            :key="car.car_id"
-            @click="$emit('fetch-car-services', car.car_id)"
-            class="clickable"
-        >
-            <td>{{ car.car_id }}</td>
+            :key="car.car_id">
+            <td class="clickable" @click="$emit('fetch-car-services', car.car_id)">{{ car.car_id }}</td>
             <td>{{ car.type }}</td>
             <td>{{ car.registered }}</td>
             <td>{{ car.ownbrand ? "Yes" : "No" }}</td>
