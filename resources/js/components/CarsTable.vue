@@ -20,8 +20,8 @@
             <td>{{ car.registered }}</td>
             <td>{{ car.ownbrand ? "Yes" : "No" }}</td>
             <td>{{ car.accidents }}</td>
-            <td>{{ car.latestService?.event || "N/A" }}</td>
-            <td>{{ car.latestService?.event_time || "N/A" }}</td>
+            <td>{{ car.latest_service?.event || "N/A" }}</td>
+            <td>{{ car.latest_service?.event_time || "N/A" }}</td>
         </tr>
         </tbody>
 
