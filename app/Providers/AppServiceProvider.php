@@ -1,27 +1,35 @@
 <?php
 
-
 namespace App\Providers;
 
-use App\Traits\DatabaseSeederTrait;
 use Illuminate\Support\ServiceProvider;
+use App\Services\DatabaseSeederService;
 
 class AppServiceProvider extends ServiceProvider
 {
-    use DatabaseSeederTrait;
 
     /**
      * Register any application services.
      */
     public function register(): void
     {
-        //
+        $this->app->singleton(DatabaseSeederService::class, function ($app) {
+            return new DatabaseSeederService(
+                $app->make(\App\Services\JsonFileReader::class),
+                $app->make(\App\Services\DataTransformer::class)
+            );
+        });
     }
 
-    public function boot()
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
     {
-        if ($this->isDatabaseEmpty()) {
-            $this->seedDatabase();
+        $seeder = app(DatabaseSeederService::class);
+
+        if ($seeder->isDatabaseEmpty()) {
+            $seeder->seedDatabase();
         }
     }
 }
