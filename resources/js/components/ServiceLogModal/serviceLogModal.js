@@ -20,6 +20,12 @@ export default {
         totalPages() {
             return Math.ceil(this.services.length / this.pageSize);
         },
+        carId() {
+            return this.services.length > 0 ? this.services[0].car_id : "N/A";
+        },
+        clientId() {
+            return this.services.length > 0 ? this.services[0].client_id : "N/A";
+        },
     },
     methods: {
         changePage(page) {
