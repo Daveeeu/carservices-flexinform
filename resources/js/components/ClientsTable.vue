@@ -10,7 +10,7 @@
         <tbody>
         <template v-for="client in clients" :key="client.id">
             <!-- Client Row -->
-            <tr>
+            <tr :class="{ 'table-primary': expandedClientId === client.id }">
                 <td>{{ client.id }}</td>
                 <td @click="$emit('toggle-client-cars', client.id)" class="clickable">
                     {{ client.name }}
