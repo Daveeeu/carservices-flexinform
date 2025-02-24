@@ -21,7 +21,7 @@ Ez a projekt egy Laravel 11 alapú alkalmazás, amely Docker konténerben fut. A
 ## Telepítési Útmutató
 
 ### 1. Projekt Klónozása
-Klónozd a projektet
+Klónozd a projektet:
 ```bash
 git clone https://github.com/Daveeeu/carservices-flexinform
 cd carservices-flexinform
@@ -34,18 +34,61 @@ A projekt Docker alapú, ezért szükséges a Docker Compose használata:
    ```bash
    docker-compose up --build -d
    ```
-
-### 3. Adatbázis Migrációk
+3. Adatbázis Migrációk (Docker esetén)
 Hozd létre az adatbázis táblákat:
-```bash
-docker exec laravel_app php artisan migrate
-```
-
-### 4. Alkalmazás Indítása
+    ```bash
+    docker exec laravel_app php artisan migrate
+    ```
+4. Alkalmazás Indítása (Docker esetén)
 Az alkalmazás elérhető lesz az alábbi címen:
-```
-http://localhost:8080
-```
+    ```
+    http://localhost:8080
+    ```
+
+### 3. Alternatíva Docker Nélkül
+
+Ha nem szeretnél Dockert használni, kövesd az alábbi lépéseket:
+
+1. **Környezeti változók beállítása**
+   Másold az `.env.example` fájlt `.env` néven, majd konfiguráld az adatbázis kapcsolatot és egyéb beállításokat:
+   ```bash
+   cp .env.example .env
+   ```
+
+2. **Composer függőségek telepítése**
+   Győződj meg róla, hogy a Composer telepítve van, majd futtasd:
+   ```bash
+   composer install
+   ```
+
+3. **Node.js függőségek telepítése**
+   Telepítsd az npm csomagokat:
+   ```bash
+   npm install
+   ```
+
+4. **Assetek buildelése**
+   Futtasd a Vite build parancsot:
+   ```bash
+   npm run build
+   ```
+
+5. **Adatbázis migrációk**
+   Hozd létre az adatbázis táblákat:
+   ```bash
+   php artisan migrate
+   ```
+
+6. **Fejlesztői szerver indítása**
+   Indítsd el a Laravel beépített szerverét:
+   ```bash
+   php artisan serve
+   ```
+   Az alkalmazás alapértelmezés szerint elérhető lesz itt:
+   ```
+   http://127.0.0.1:8000
+   ```
+
 
 ---
 
@@ -54,4 +97,4 @@ http://localhost:8080
 1. **Ügyfelek Listázása**: Az alkalmazás főoldalán megjelennek az ügyfelek adatai.
 2. **Ügyfél Autói**: Kattints egy ügyfél nevére, hogy megjelenjenek az autói.
 3. **Szerviznapló Megtekintése**: Kattints egy autó sorszámára, hogy megjelenjen annak szerviznaplója.
-4. **Kereső Funkció**: Az oldal tetején található kereső segítségével ügyfeleket kereshetsz név vagy okmányazonosító alapján.
+4. **Kereső Funkció**: Az oldal tetején található kereső segítségével ügyfeleket kereshetsz név vagy okmányazonosító alapján
