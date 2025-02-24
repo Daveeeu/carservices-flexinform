@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laravel és Vue</title>
+    <title>Teszt feladat - Flexinform</title>
     @vite(['resources/js/app.js'])
 </head>
 <body>
