@@ -26,11 +26,12 @@ COPY ../.. .
 
 RUN cp .env.example .env
 
-RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 RUN composer install --no-dev --optimize-autoloader
 
 RUN npm install && npm run build
+
+RUN chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache && chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
 
 RUN php artisan key:generate
 
